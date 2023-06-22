@@ -11,12 +11,12 @@ func Day3PartOne() int {
 	sum := 0
 	duplicates := getAllDuplicates()
 	for _, duplicate := range duplicates {
-		sum += getValueFromLetter(rune(duplicate[0]))
+		sum += GetValueFromLetter(rune(duplicate[0]))
 	}
 	return sum
 }
 
-func fetchInput() []string {
+func GetInput() []string {
 	currentDir, err := os.Getwd()
 	file, err := os.Open(currentDir + "/day3/input")
 	if err != nil {
@@ -34,7 +34,7 @@ func fetchInput() []string {
 }
 
 func getAllDuplicates() []string {
-	input := fetchInput()
+	input := GetInput()
 	duplicates := make([]string, 0)
 
 	for _, line := range input {
@@ -56,9 +56,9 @@ func getAllDuplicates() []string {
 	return duplicates
 }
 
-func getValueFromLetter(letter rune) int {
+func GetValueFromLetter(letter rune) int {
 	if unicode.IsUpper(letter) {
-    return int(letter) - 38
+		return int(letter) - 38
 	}
 	return int(letter) - 96
 }

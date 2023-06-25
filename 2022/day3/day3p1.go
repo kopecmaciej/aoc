@@ -1,40 +1,25 @@
 package day3
 
 import (
-	"bufio"
-	"os"
+	"aoc-2022-1/utils"
 	"strings"
 	"unicode"
 )
 
 func Day3PartOne() int {
+	input, err := utils.GetInput()
+	if err != nil {
+		panic(err)
+	}
 	sum := 0
-	duplicates := getAllDuplicates()
+	duplicates := getAllDuplicates(input)
 	for _, duplicate := range duplicates {
 		sum += GetValueFromLetter(rune(duplicate[0]))
 	}
 	return sum
 }
 
-func GetInput() []string {
-	currentDir, err := os.Getwd()
-	file, err := os.Open(currentDir + "/day3/input")
-	if err != nil {
-		panic(err)
-	}
-	defer file.Close()
-
-	scanner := bufio.NewScanner(file)
-	input := make([]string, 0)
-	for scanner.Scan() {
-		input = append(input, scanner.Text())
-	}
-
-	return input
-}
-
-func getAllDuplicates() []string {
-	input := GetInput()
+func getAllDuplicates(input []string) []string {
 	duplicates := make([]string, 0)
 
 	for _, line := range input {

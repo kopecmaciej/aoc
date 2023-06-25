@@ -1,7 +1,12 @@
 package day3
 
-func Day3PartTwo() int {
-	input := GetInput()
+import "aoc-2022-1/utils"
+
+func Day3PartTwo() (int, error) {
+	input, err := utils.GetInput()
+	if err != nil {
+		return 0, err
+	}
 
 	groups := [][]string{}
 
@@ -23,7 +28,7 @@ func Day3PartTwo() int {
 		sum += value
 	}
 
-	return sum
+	return sum, nil
 }
 
 func findUniqueIntersection(one, two, three string) rune {

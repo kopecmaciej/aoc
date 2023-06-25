@@ -24,7 +24,10 @@ func exec_day2() {
 }
 
 func exec_day3() {
-  fmt.Println("Day 3 part 1: ", day3.Day3PartOne())
-  fmt.Println("Day 3 part 2: ", day3.Day3PartTwo())
+  result, err := day3.Day3PartTwo()
+  if err != nil {
+    fmt.Println(err)
+  }
+  fmt.Println("Day 3 part 2: ", result)
 }
 

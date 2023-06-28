@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func TestPart1Success(t *testing.T) {
+func TestPart1(t *testing.T) {
 	input := []string{
 		"2-3,1-6",
 		"2-9,6-8",
@@ -13,24 +13,25 @@ func TestPart1Success(t *testing.T) {
 	}
 
 	expected := 3
-	actual := part1Logic(input)
+	actual := checkNumOfOverlaps(input)
 
 	if actual != expected {
 		t.Errorf("Expected %d, got %d", expected, actual)
 	}
 }
 
-func TestPart1Failure(t *testing.T) {
+func TestPart2(t *testing.T) {
 	input := []string{
-		"1-3,5-7",
-		"2-4,6-8",
-		"3-5,7-9",
+		"2-4,3-6",
+		"2-9,6-8",
+		"3-5,6-9",
+		"4-20,12-18",
 	}
 
-	expected := 2
-	actual := part1Logic(input)
+	expected := 3
+	actual := overlapAll(input)
 
-	if actual == expected {
+	if actual != expected {
 		t.Errorf("Expected %d, got %d", expected, actual)
 	}
 }

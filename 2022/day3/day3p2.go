@@ -3,7 +3,7 @@ package day3
 import "aoc-2022-1/utils"
 
 func Day3PartTwo() (int, error) {
-	input, err := utils.GetInput()
+	input, err := utils.GetInput(day)
 	if err != nil {
 		return 0, err
 	}

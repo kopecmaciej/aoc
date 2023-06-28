@@ -3,22 +3,26 @@ package utils
 import (
 	"bufio"
 	"os"
+	"path/filepath"
+	"runtime"
 )
 
-func GetInput() ([]string, error) {
-  dir, _ := os.Getwd()
-  file, err := os.Open(dir + "/input")
-  if err != nil {
-    return nil, err
-  }
-  defer file.Close()
+func GetInput(year string) ([]string, error) {
+	_, b, _, _ := runtime.Caller(0)
+  root := filepath.Join(filepath.Dir(b), "../")
+	file, err := os.Open(root + "/" + year + "/input")
 
-  var input []string
-  scanner := bufio.NewScanner(file)
+	if err != nil {
+		return nil, err
+	}
+	defer file.Close()
 
-  for scanner.Scan() {
-    input = append(input, scanner.Text())
-  }
+	var input []string
+	scanner := bufio.NewScanner(file)
 
-  return input, nil
+	for scanner.Scan() {
+		input = append(input, scanner.Text())
+	}
+
+	return input, nil
 }

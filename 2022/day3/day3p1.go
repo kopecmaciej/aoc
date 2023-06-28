@@ -6,8 +6,12 @@ import (
 	"unicode"
 )
 
+const (
+  day = "day3"
+)
+
 func Day3PartOne() int {
-	input, err := utils.GetInput()
+	input, err := utils.GetInput(day)
 	if err != nil {
 		panic(err)
 	}

@@ -14,14 +14,18 @@ func Day6Part1() int {
 	}
 	data := bufio.NewReader(strings.NewReader(string(buff)))
 
-  var unique []rune
+	return searchForUniqueMarker(data, 4)
+}
+
+func searchForUniqueMarker(data *bufio.Reader, markerLen int) int {
+	var unique []rune
 	curr := 0
 	for {
 		if c, _, err := data.ReadRune(); err == nil {
 			if err == io.EOF {
 				break
 			} else {
-				if len(unique) == 4 {
+				if len(unique) == markerLen {
 					if checkIfSliceUnique(unique) {
 						break
 					}

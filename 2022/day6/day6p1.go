@@ -39,13 +39,13 @@ func searchForUniqueMarker(data *bufio.Reader, markerLen int) int {
 	return curr
 }
 
-func checkIfSliceUnique(unique []rune) bool {
-	for i := 0; i < len(unique); i++ {
-		for j := i + 1; j < len(unique); j++ {
-			if unique[i] == unique[j] {
-				return false
-			}
+func checkIfSliceUnique[T string | byte | rune](unique []T) bool {
+	uniqueMap := make(map[T]bool)
+	for _, val := range unique {
+		if _, ok := uniqueMap[val]; ok {
+			return false
 		}
+		uniqueMap[val] = true
 	}
 	return true
 }

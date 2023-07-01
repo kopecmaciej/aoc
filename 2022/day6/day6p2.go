@@ -13,5 +13,20 @@ func Day6Part2() int {
 	}
 	data := bufio.NewReader(strings.NewReader(string(buff)))
 
-	return searchForUniqueMarker(data, 14)
+	markLen := 14
+  peek := 0
+	for {
+		mark, err := data.Peek(markLen)
+    mark = mark[peek:markLen]
+		if err != nil {
+			return 0
+		}
+		if checkIfSliceUnique(mark) {
+			break
+		}
+		markLen++
+    peek++
+	}
+
+	return markLen
 }

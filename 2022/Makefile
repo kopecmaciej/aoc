@@ -1,4 +1,6 @@
 .PHONY: run
 
-run:
-	go run ./...
+DAY=
+
+test:
+	go test ./${DAY}/... -v

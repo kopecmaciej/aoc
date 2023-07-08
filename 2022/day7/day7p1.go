@@ -12,6 +12,10 @@ const (
 	dirPattern = "dir "
 )
 
+type stack struct {
+	data []int
+}
+
 func Day7Part1() int {
 	input, err := utils.GetInput("day7")
 	if err != nil {
@@ -23,33 +27,32 @@ func Day7Part1() int {
 
 func findTotalDirsSize(input []string) int {
 	total := 0
-	dirsStack := []int{0}
+	dirsStack := stack{[]int{0}}
 	for i, line := range input {
 		switch {
 		case strings.HasPrefix(line, lsPattern):
 		case strings.HasPrefix(line, dirPattern):
 		case strings.HasPrefix(line, cdPattern):
 			if line == cdPattern+" .." {
-				if len(dirsStack) == 0 {
-					dirsStack = append(dirsStack, 0)
+				if dirsStack.len() == 0 {
+					dirsStack.push(0)
 				}
-				lastDirSize := dirsStack[len(dirsStack)-1]
+				lastDirSize := dirsStack.pop()
 				if lastDirSize <= 100000 {
 					total += lastDirSize
 				}
-				dirsStack = dirsStack[:len(dirsStack)-1]
-				dirsStack[len(dirsStack)-1] += lastDirSize
+        dirsStack.addToLast(lastDirSize)
 			} else {
-				dirsStack = append(dirsStack, 0)
+				dirsStack.push(0)
 			}
 		default:
 			size, err := getFileSize(line)
 			if err != nil {
 				continue
 			}
-			dirsStack[len(dirsStack)-1] += size
+      dirsStack.addToLast(size)
 			if i == len(input)-1 {
-				total += dirsStack[len(dirsStack)-1]
+				total += dirsStack.peekLast()
 			}
 		}
 	}
@@ -63,4 +66,26 @@ func getFileSize(line string) (int, error) {
 		return 0, err
 	}
 	return size, nil
+}
+
+func (s stack) len() int {
+	return len(s.data)
+}
+
+func (s *stack) push(i int) {
+	s.data = append(s.data, i)
+}
+
+func (s *stack) pop() int {
+	i := s.data[len(s.data)-1]
+	s.data = s.data[:len(s.data)-1]
+	return i
+}
+
+func (s stack) addToLast(i int) {
+	s.data[len(s.data)-1] += i
+}
+
+func (s stack) peekLast() int {
+	return s.data[len(s.data)-1]
 }

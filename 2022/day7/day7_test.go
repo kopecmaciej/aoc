@@ -11,6 +11,11 @@ func TestDay7Part1(t *testing.T) {
 	t.Logf("Day 7 Part 1 result: %d", output)
 }
 
+func TestDay7Part2(t *testing.T) {
+	output := Day7Part2()
+	t.Logf("Day 7 Part 2 result: %d", output)
+}
+
 func TestFindTotalDirSize(t *testing.T) {
 	testInput := []string{
 		"$ cd /",

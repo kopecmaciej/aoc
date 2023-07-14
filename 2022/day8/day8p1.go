@@ -44,7 +44,7 @@ func countVisableTrees(input []string) int {
 		if i == 0 || i == len(input)-1 {
 			continue
 		}
-		checkInNearestRows(rows[i], columns[i], i, treeMatrix)
+		checkVisability(rows[i], columns[i], i, treeMatrix)
 	}
 
 	for _, row := range treeMatrix {
@@ -58,7 +58,7 @@ func countVisableTrees(input []string) int {
 	return total
 }
 
-func checkInNearestRows(row, column []byte, inc int, matrix [][]byte) {
+func checkVisability(row, column []byte, inc int, matrix [][]byte) {
 	//horizontal
 	leftBiggest := row[0]
 	rightBiggest := row[len(row)-1]

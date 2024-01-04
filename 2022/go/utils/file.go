@@ -9,8 +9,8 @@ import (
 
 func GetInput(day string) ([]string, error) {
 	_, b, _, _ := runtime.Caller(0)
-  root := filepath.Join(filepath.Dir(b), "../")
-	file, err := os.Open(root + "/" + day + "/input")
+	root := filepath.Join(filepath.Dir(b), "../")
+	file, err := os.Open(root + "/input" + day)
 
 	if err != nil {
 		return nil, err

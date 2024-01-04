@@ -1,4 +1,4 @@
-package day1
+package main
 
 import (
 	"bufio"
@@ -6,6 +6,10 @@ import (
 	"os"
 	"strconv"
 )
+
+func main() {
+  fmt.Println("Max calories: ", GetMaxcallories())
+}
 
 func GetMaxcallories() int {
 	calories := getAllCalories()
@@ -23,15 +27,7 @@ func GetMaxcallories() int {
 }
 
 func getAllCalories() [][]int {
-	file, err := os.Open("input")
-	if err != nil {
-		fmt.Println("Error reading file")
-		os.Exit(1)
-	}
-
-	defer file.Close()
-
-	scanner := bufio.NewScanner(file)
+	scanner := bufio.NewScanner(os.Stdin)
 	var allElfsCalories [][]int
 	currIndex := 0
 	for scanner.Scan() {
